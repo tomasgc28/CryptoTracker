@@ -1,7 +1,9 @@
 package com.plcoding.cryptotracker.domain.coin.di
 
+import com.plcoding.cryptotracker.domain.coin.usecases.GetCoinDetailUseCase
 import com.plcoding.cryptotracker.domain.coin.usecases.GetCoinHistoryUseCase
 import com.plcoding.cryptotracker.domain.coin.usecases.GetCoinsUseCase
+import com.plcoding.cryptotracker.domain.coin.usecases.impl.GetCoinDetailUseCaseImpl
 import com.plcoding.cryptotracker.domain.coin.usecases.impl.GetCoinHistoryUseCaseImpl
 import com.plcoding.cryptotracker.domain.coin.usecases.impl.GetCoinsUseCaseImpl
 import dagger.Binds
@@ -22,4 +24,11 @@ abstract class CoinsUseCaseModule {
     abstract fun bindGetCoinHistoryUseCase(
         impl: GetCoinHistoryUseCaseImpl
     ): GetCoinHistoryUseCase
+
+    @Binds
+    abstract fun bindGetCoinDetailUseCase(
+        impl: GetCoinDetailUseCaseImpl
+    ): GetCoinDetailUseCase
+
+
 }

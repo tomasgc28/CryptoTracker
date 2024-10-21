@@ -9,6 +9,8 @@ import java.time.ZonedDateTime
 interface CoinsRepository {
     suspend fun getCoins(): Result<List<Coin>, NetworkError>
 
+    suspend fun getCoinDetail(coinId: String): Result<Coin, NetworkError>
+
     suspend fun getCoinHistory(
         coinId: String,
         start: ZonedDateTime,

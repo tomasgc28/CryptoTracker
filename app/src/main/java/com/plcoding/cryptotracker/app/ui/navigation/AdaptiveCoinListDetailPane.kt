@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3AdaptiveApi::class)
 
-package com.plcoding.cryptotracker.core.navigation
+package com.plcoding.cryptotracker.app.ui.navigation
 
 import android.widget.Toast
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi

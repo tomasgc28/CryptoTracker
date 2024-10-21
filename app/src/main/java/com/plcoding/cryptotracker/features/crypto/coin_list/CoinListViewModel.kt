@@ -1,9 +1,11 @@
 package com.plcoding.cryptotracker.features.crypto.coin_list
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.plcoding.cryptotracker.core.domain.util.onError
 import com.plcoding.cryptotracker.core.domain.util.onSuccess
+import com.plcoding.cryptotracker.domain.coin.usecases.GetCoinDetailUseCase
 import com.plcoding.cryptotracker.features.crypto.models.CoinUi
 import com.plcoding.cryptotracker.features.crypto.models.toCoinUi
 import com.plcoding.cryptotracker.domain.coin.usecases.GetCoinHistoryUseCase
@@ -25,7 +27,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CoinListViewModel @Inject constructor(
     private val getCoinsUseCase: GetCoinsUseCase,
-    private val getCoinHistoryUseCase: GetCoinHistoryUseCase
+    private val getCoinHistoryUseCase: GetCoinHistoryUseCase,
+    private val getCoinDetailUseCase: GetCoinDetailUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(CoinListState())
@@ -82,6 +85,11 @@ class CoinListViewModel @Inject constructor(
                 .onError { error ->
                     _events.send(CoinListEvent.Error(error))
                 }
+
+            getCoinDetailUseCase.getCoinDetail(coinUi.id).onSuccess {
+                Log.e("getCoinDetailUseCase", it.toString() )
+            }
+
         }
     }
 

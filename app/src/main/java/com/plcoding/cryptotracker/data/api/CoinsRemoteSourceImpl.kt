@@ -15,6 +15,11 @@ class CoinsRemoteSourceImpl @Inject constructor(
     override suspend fun getCoins(): Result<List<Coin>, NetworkError> {
         return coinsService.getCoins()
     }
+
+    override suspend fun getCoinDetail(coinId: String): Result<Coin, NetworkError> {
+        return coinsService.getCoinDetail(coinId)
+    }
+
     override suspend fun getCoinHistory(
         coinId: String,
         start: ZonedDateTime,

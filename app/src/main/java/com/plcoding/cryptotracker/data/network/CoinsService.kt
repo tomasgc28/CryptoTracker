@@ -5,6 +5,7 @@ import com.plcoding.cryptotracker.core.data.networking.safeCall
 import com.plcoding.cryptotracker.core.domain.util.NetworkError
 import com.plcoding.cryptotracker.core.domain.util.Result
 import com.plcoding.cryptotracker.core.domain.util.map
+import com.plcoding.cryptotracker.data.network.dto.CoinDetailsResponse
 import com.plcoding.cryptotracker.data.network.mappers.toCoin
 import com.plcoding.cryptotracker.data.network.mappers.toCoinPrice
 import com.plcoding.cryptotracker.data.network.dto.CoinHistoryDto
@@ -29,6 +30,18 @@ class CoinsService @Inject constructor(
             )
         }.map { response ->
             response.data.map { it.toCoin() }
+        }
+    }
+
+    suspend fun getCoinDetail(coinId: String): Result<Coin,NetworkError> {
+        return safeCall<CoinDetailsResponse> {
+            httpClient.get(
+                urlString = constructUrl("/assets/$coinId")
+            ) {
+
+            }
+        }.map { response ->
+            response.data.toCoin()
         }
     }
 

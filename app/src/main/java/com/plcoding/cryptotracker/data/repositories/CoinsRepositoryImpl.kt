@@ -17,6 +17,10 @@ class CoinsRepositoryImpl @Inject constructor(
         return coinsRemoteSource.getCoins()
     }
 
+    override suspend fun getCoinDetail(coinId: String): Result<Coin, NetworkError> {
+        return coinsRemoteSource.getCoinDetail(coinId)
+    }
+
     override suspend fun getCoinHistory(
         coinId: String,
         start: ZonedDateTime,
