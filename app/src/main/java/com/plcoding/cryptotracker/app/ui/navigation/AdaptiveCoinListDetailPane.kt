@@ -31,7 +31,7 @@ fun AdaptiveCoinListDetailPane(
     val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
     ObserveAsEvents(events = viewModel.events) { event ->
-        when(event) {
+        when (event) {
             is CoinListEvent.Error -> {
                 Toast.makeText(
                     context,
@@ -51,7 +51,7 @@ fun AdaptiveCoinListDetailPane(
                     state = state,
                     onAction = { action ->
                         viewModel.onAction(action)
-                        when(action) {
+                        when (action) {
                             is CoinListAction.OnCoinClick -> {
                                 navigator.navigateTo(
                                     pane = ListDetailPaneScaffoldRole.Detail
