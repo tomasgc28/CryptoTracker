@@ -26,7 +26,7 @@ import com.plcoding.cryptotracker.features.crypto.coin_list.CoinListViewModel
 @Composable
 fun AdaptiveCoinListDetailPane(
     modifier: Modifier = Modifier,
-    viewModel: CoinListViewModel = hiltViewModel()
+    viewModel: CoinListViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
