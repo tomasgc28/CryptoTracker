@@ -2,9 +2,9 @@ package com.plcoding.cryptotracker.data.network
 
 import com.plcoding.cryptotracker.core.data.networking.constructUrl
 import com.plcoding.cryptotracker.core.data.networking.safeCall
-import com.plcoding.cryptotracker.core.domain.util.NetworkError
-import com.plcoding.cryptotracker.core.domain.util.Result
-import com.plcoding.cryptotracker.core.domain.util.map
+import com.plcoding.cryptotracker.domain.util.NetworkError
+import com.plcoding.cryptotracker.domain.util.Result
+import com.plcoding.cryptotracker.domain.util.map
 import com.plcoding.cryptotracker.data.network.dto.CoinDetailsResponse
 import com.plcoding.cryptotracker.data.network.mappers.toCoin
 import com.plcoding.cryptotracker.data.network.mappers.toCoinPrice
@@ -33,7 +33,7 @@ class CoinsService @Inject constructor(
         }
     }
 
-    suspend fun getCoinDetail(coinId: String): Result<Coin,NetworkError> {
+    suspend fun getCoinDetail(coinId: String): Result<Coin, NetworkError> {
         return safeCall<CoinDetailsResponse> {
             httpClient.get(
                 urlString = constructUrl("/assets/$coinId")

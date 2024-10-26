@@ -1,7 +1,7 @@
 package com.plcoding.cryptotracker.data.repositories
 
-import com.plcoding.cryptotracker.core.domain.util.NetworkError
-import com.plcoding.cryptotracker.core.domain.util.Result
+import com.plcoding.cryptotracker.domain.util.NetworkError
+import com.plcoding.cryptotracker.domain.util.Result
 import com.plcoding.cryptotracker.domain.coin.model.Coin
 import com.plcoding.cryptotracker.domain.coin.model.CoinPrice
 import java.time.ZonedDateTime

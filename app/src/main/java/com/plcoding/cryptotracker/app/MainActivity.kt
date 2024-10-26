@@ -5,13 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.plcoding.cryptotracker.app.ui.navigation.AdaptiveCoinListDetailPane
-import com.plcoding.cryptotracker.app.ui.navigation.AppNavigation
+import com.plcoding.cryptotracker.app.ui.navigation.CoinAppNavHost
 import com.plcoding.cryptotracker.core.designsystem.theme.CryptoTrackerTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,10 +25,12 @@ class MainActivity : ComponentActivity() {
             CryptoTrackerTheme {
                 val navController = rememberNavController()
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    AppNavigation(
-                        modifier = Modifier.fillMaxSize(),
+                    CoinAppNavHost(
                         navController = navController,
-                        padding = innerPadding,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(innerPadding)
+                            .consumeWindowInsets(innerPadding)
                     )
                 }
             }

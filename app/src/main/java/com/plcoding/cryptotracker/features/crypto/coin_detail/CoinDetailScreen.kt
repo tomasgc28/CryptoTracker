@@ -48,7 +48,7 @@ import com.plcoding.cryptotracker.features.crypto.models.toDisplayableNumber
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun CoinDetailScreen(
-    state: CoinListState,
+    state: CoinDetailState,
     modifier: Modifier = Modifier
 ) {
     val contentColor = if(isSystemInDarkTheme()) {
@@ -64,8 +64,8 @@ fun CoinDetailScreen(
         ) {
             CircularProgressIndicator()
         }
-    } else if(state.selectedCoin != null) {
-        val coin = state.selectedCoin
+    } else if(state.coin != null) {
+        val coin = state.coin
         Column(
             modifier = modifier
                 .fillMaxSize()
@@ -186,8 +186,8 @@ fun CoinDetailScreen(
 private fun CoinDetailScreenPreview() {
     CryptoTrackerTheme {
         CoinDetailScreen(
-            state = CoinListState(
-                selectedCoin = previewCoin,
+            state = CoinDetailState(
+                coin = previewCoin,
             ),
             modifier = Modifier.background(
                 MaterialTheme.colorScheme.background

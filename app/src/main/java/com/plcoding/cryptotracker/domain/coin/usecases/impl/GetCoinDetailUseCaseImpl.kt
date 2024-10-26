@@ -1,7 +1,7 @@
 package com.plcoding.cryptotracker.domain.coin.usecases.impl
 
-import com.plcoding.cryptotracker.core.domain.util.NetworkError
-import com.plcoding.cryptotracker.core.domain.util.Result
+import com.plcoding.cryptotracker.domain.util.NetworkError
+import com.plcoding.cryptotracker.domain.util.Result
 import com.plcoding.cryptotracker.data.repositories.CoinsRepository
 import com.plcoding.cryptotracker.domain.coin.model.Coin
 import com.plcoding.cryptotracker.domain.coin.usecases.GetCoinDetailUseCase
