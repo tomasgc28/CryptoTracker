@@ -7,3 +7,9 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 object CoinListDetailPane
+
+@Serializable
+object CoinList
+
+@Serializable
+object CoinDetail
