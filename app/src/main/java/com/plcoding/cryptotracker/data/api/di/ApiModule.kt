@@ -1,6 +1,6 @@
 package com.plcoding.cryptotracker.data.api.di
 
-import com.plcoding.cryptotracker.data.api.CoinsRemoteSource
+import com.plcoding.cryptotracker.data.api.EventRemoteSource
 import com.plcoding.cryptotracker.data.api.CoinsRemoteSourceImpl
 import dagger.Binds
 import dagger.Module
@@ -12,6 +12,6 @@ import dagger.hilt.components.SingletonComponent
 abstract class ApiModule {
 
   @Binds
-  abstract fun bindCoinsService(impl: CoinsRemoteSourceImpl): CoinsRemoteSource
+  abstract fun bindCoinsService(impl: CoinsRemoteSourceImpl): EventRemoteSource
 
 }

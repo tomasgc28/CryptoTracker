@@ -16,14 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.plcoding.cryptotracker.core.designsystem.theme.CryptoTrackerTheme
-import com.plcoding.cryptotracker.features.crypto.coin_list.components.CoinListItem
-import com.plcoding.cryptotracker.features.crypto.coin_list.components.previewCoin
-
+import com.plcoding.cryptotracker.domain.coin.model.Event
+import com.plcoding.cryptotracker.features.crypto.coin_list.components.EventItem
 
 @Composable
-fun CoinListScreen(
-    state: CoinListState,
-    onAction: (CoinListAction) -> Unit,
+fun EventListScreen(
+    state: EventListState,
+    onAction: (EventListAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
     if(state.isLoading) {
@@ -40,11 +39,11 @@ fun CoinListScreen(
                 .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(state.coins) { coinUi ->
-                CoinListItem(
-                    coinUi = coinUi,
+            items(state.event) { eventUi ->
+                EventItem(
+                    event = eventUi,
                     onClick = {
-                        onAction(CoinListAction.OnCoinClick(coinUi))
+                        onAction(EventListAction.OnEventClick(eventUi))
                     },
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -58,10 +57,20 @@ fun CoinListScreen(
 @Composable
 private fun CoinListScreenPreview() {
     CryptoTrackerTheme {
-        CoinListScreen(
-            state = CoinListState(
-                coins = (1..100).map {
-                    previewCoin.copy(id = it.toString())
+        EventListScreen(
+            state = EventListState(
+                event = (1..100).map {
+                    Event(
+                        id = it,
+                        description = "Event description $it",
+                        title = "Event Title $it",
+                        timestamp = "2024-10-28T12:00:00Z",
+                        image = null,
+                        date = "2024-10-28T12:00:00Z",
+                        locationLine1 = "Location Line 1 $it",
+                        locationLine2 = "Location Line 2",
+                        phone = "123-456-7890"
+                    )
                 }
             ),
             modifier = Modifier
