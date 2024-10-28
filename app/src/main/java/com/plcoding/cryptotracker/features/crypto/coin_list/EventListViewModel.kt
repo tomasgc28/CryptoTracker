@@ -33,6 +33,19 @@ class EventListViewModel @Inject constructor(
     private val _events = Channel<EventListEvent>()
     val events = _events.receiveAsFlow()
 
+    fun onAction(action: EventListAction) {
+        when (action) {
+            is EventListAction.OnEventClick -> {
+                action.event
+                _state.update { eventListState ->
+                    eventListState.copy(
+                        selectedEvent = action.event
+                    )
+                }
+
+            }
+        }
+    }
 
     private fun loadEvents() {
         viewModelScope.launch {
@@ -45,8 +58,8 @@ class EventListViewModel @Inject constructor(
             getEventUseCase
                 .getEvents()
                 .onSuccess { events ->
-                    _state.update { EventListState ->
-                        EventListState.copy(
+                    _state.update { eventListState ->
+                        eventListState.copy(
                             isLoading = false,
                             event = events
                         )

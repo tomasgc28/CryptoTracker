@@ -49,6 +49,7 @@ fun AdaptiveCoinListDetailPane(
                 EventListScreen(
                     state = state,
                     onAction = { action ->
+                        viewModel.onAction(action)
                         when (action) {
                             is EventListAction.OnEventClick -> {
                                 navigator.navigateTo(
@@ -62,7 +63,7 @@ fun AdaptiveCoinListDetailPane(
         },
         detailPane = {
             AnimatedPane {
-                EventDetailsScreen(event = state.event.first())
+                state.selectedEvent?.let { EventDetailsScreen(event = it) }
             }
         },
         modifier = modifier
