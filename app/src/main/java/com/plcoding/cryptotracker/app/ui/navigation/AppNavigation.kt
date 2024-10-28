@@ -1,17 +1,11 @@
 package com.plcoding.cryptotracker.app.ui.navigation
 
-import android.util.Log.v
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
-import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffoldRole
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -19,10 +13,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.plcoding.cryptotracker.features.crypto.coin_detail.CoinDetailScreen
-import com.plcoding.cryptotracker.features.crypto.coin_list.CoinListAction
-import com.plcoding.cryptotracker.features.crypto.coin_list.CoinListScreen
-import com.plcoding.cryptotracker.features.crypto.coin_list.CoinListViewModel
+import com.plcoding.cryptotracker.features.crypto.coin_detail.EventDetailsScreen
+import com.plcoding.cryptotracker.features.crypto.coin_list.EventListAction
+import com.plcoding.cryptotracker.features.crypto.coin_list.EventListScreen
+import com.plcoding.cryptotracker.features.crypto.coin_list.EventListViewModel
 
 @ExperimentalAnimationApi
 @Composable
@@ -30,29 +24,25 @@ internal fun AppNavigation(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     padding: PaddingValues = PaddingValues(0.dp),
-    viewModel: CoinListViewModel = hiltViewModel()
+    viewModel: EventListViewModel = hiltViewModel()
 ) {
     NavHost(
         navController = navController,
-        startDestination = CoinList,
-        /** Change this to CoinListDetailPane to use Adaptive pane */
+        startDestination = CoinListDetailPane,
         modifier = modifier,
     ) {
-        addCoinListDetailPane(
+        addEventListDetailPane(
             padding = padding,
             viewModel = viewModel,
         )
 
-        /**
-         * Use regular navigation and not use Adaptive Pane
-         */
-        addCoinList(
+        addEventList(
             padding = padding,
             navController = navController,
             viewModel = viewModel,
         )
 
-        addCoinDetail(
+        addEventDetail(
             padding = padding,
             viewModel = viewModel,
         )
@@ -60,9 +50,9 @@ internal fun AppNavigation(
 }
 
 @ExperimentalAnimationApi
-private fun NavGraphBuilder.addCoinListDetailPane(
+private fun NavGraphBuilder.addEventListDetailPane(
     padding: PaddingValues,
-    viewModel: CoinListViewModel,
+    viewModel: EventListViewModel,
 ) {
     composable<CoinListDetailPane>
     {
@@ -74,21 +64,20 @@ private fun NavGraphBuilder.addCoinListDetailPane(
 }
 
 @ExperimentalAnimationApi
-private fun NavGraphBuilder.addCoinList(
+private fun NavGraphBuilder.addEventList(
     padding: PaddingValues,
     navController: NavHostController,
-    viewModel: CoinListViewModel,
+    viewModel: EventListViewModel,
 ) {
     composable<CoinList>
     {
         val state by viewModel.state.collectAsStateWithLifecycle()
-        CoinListScreen(
+        EventListScreen(
             modifier = Modifier.padding(padding),
             state = state,
             onAction = { action ->
-                viewModel.onAction(action)
                 when (action) {
-                    is CoinListAction.OnCoinClick -> {
+                    is EventListAction.OnEventClick -> {
                         navController.navigate(CoinDetail)
                     }
                 }
@@ -98,13 +87,13 @@ private fun NavGraphBuilder.addCoinList(
 }
 
 @ExperimentalAnimationApi
-private fun NavGraphBuilder.addCoinDetail(
+private fun NavGraphBuilder.addEventDetail(
     padding: PaddingValues,
-    viewModel: CoinListViewModel,
+    viewModel: EventListViewModel,
 ) {
     composable<CoinDetail>
     {
         val state by viewModel.state.collectAsStateWithLifecycle()
-        CoinDetailScreen(modifier = Modifier.padding(padding), state = state)
+        EventDetailsScreen(modifier = Modifier.padding(padding), event = state.event.first())
     }
 }

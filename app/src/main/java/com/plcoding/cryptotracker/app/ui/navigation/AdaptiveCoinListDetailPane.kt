@@ -12,27 +12,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.plcoding.cryptotracker.core.designsystem.util.ObserveAsEvents
 import com.plcoding.cryptotracker.core.designsystem.util.toString
-import com.plcoding.cryptotracker.features.crypto.coin_detail.CoinDetailScreen
-import com.plcoding.cryptotracker.features.crypto.coin_list.CoinListAction
-import com.plcoding.cryptotracker.features.crypto.coin_list.CoinListEvent
-import com.plcoding.cryptotracker.features.crypto.coin_list.CoinListScreen
-import com.plcoding.cryptotracker.features.crypto.coin_list.CoinListViewModel
+import com.plcoding.cryptotracker.features.crypto.coin_detail.EventDetailsScreen
+import com.plcoding.cryptotracker.features.crypto.coin_list.EventListAction
+import com.plcoding.cryptotracker.features.crypto.coin_list.EventListEvent
+import com.plcoding.cryptotracker.features.crypto.coin_list.EventListScreen
+import com.plcoding.cryptotracker.features.crypto.coin_list.EventListViewModel
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun AdaptiveCoinListDetailPane(
     modifier: Modifier = Modifier,
-    viewModel: CoinListViewModel,
+    viewModel: EventListViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
     ObserveAsEvents(events = viewModel.events) { event ->
         when (event) {
-            is CoinListEvent.Error -> {
+            is EventListEvent.Error -> {
                 Toast.makeText(
                     context,
                     event.error.toString(context),
@@ -47,12 +46,12 @@ fun AdaptiveCoinListDetailPane(
         navigator = navigator,
         listPane = {
             AnimatedPane {
-                CoinListScreen(
+                EventListScreen(
                     state = state,
                     onAction = { action ->
                         viewModel.onAction(action)
                         when (action) {
-                            is CoinListAction.OnCoinClick -> {
+                            is EventListAction.OnEventClick -> {
                                 navigator.navigateTo(
                                     pane = ListDetailPaneScaffoldRole.Detail
                                 )
@@ -64,7 +63,7 @@ fun AdaptiveCoinListDetailPane(
         },
         detailPane = {
             AnimatedPane {
-                CoinDetailScreen(state = state)
+                state.selectedEvent?.let { EventDetailsScreen(event = it) }
             }
         },
         modifier = modifier
