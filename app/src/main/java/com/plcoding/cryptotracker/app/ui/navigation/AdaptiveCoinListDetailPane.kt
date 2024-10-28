@@ -63,7 +63,9 @@ fun AdaptiveCoinListDetailPane(
         },
         detailPane = {
             AnimatedPane {
-                state.selectedEvent?.let { EventDetailsScreen(event = it) }
+                state.selectedEvent?.let { EventDetailsScreen(event = it) } ?: EventDetailsScreen(
+                    event = state.event.first()
+                )
             }
         },
         modifier = modifier

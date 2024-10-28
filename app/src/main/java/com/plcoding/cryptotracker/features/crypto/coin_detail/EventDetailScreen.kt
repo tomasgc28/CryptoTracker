@@ -3,6 +3,7 @@ package com.plcoding.cryptotracker.features.crypto.coin_detail
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -15,22 +16,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.plcoding.cryptotracker.domain.coin.model.Event
+import com.plcoding.cryptotracker.domain.util.toLocalDateTimeString
 
 @Composable
 fun EventDetailsScreen(modifier: Modifier = Modifier, event: Event) {
-    Column(modifier = modifier.padding(16.dp)) {
+    Column(modifier = modifier
+        .fillMaxSize()
+        .padding(16.dp)
+        .padding(top = 30.dp)) {
         Text(text = event.title, style = MaterialTheme.typography.titleLarge)
         Spacer(modifier = Modifier.height(8.dp))
         event.image?.let {
             AsyncImage(
                 model = it, contentDescription = null,
-                contentScale = ContentScale.Crop, modifier = Modifier.size(48.dp)
+                contentScale = ContentScale.Crop, modifier = Modifier.size(88.dp)
             )
             Spacer(modifier = Modifier.height(8.dp))
         }
         Text(text = "Description: ${event.description}")
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = "Date: ${event.date}")
+        Text(text = "Date: ${event.date.toLocalDateTimeString()}")
         Spacer(modifier = Modifier.height(8.dp))
         Text(text = "Location: ${event.locationLine1}, ${event.locationLine2}")
         event.phone?.let {

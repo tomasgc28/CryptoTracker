@@ -25,8 +25,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.plcoding.cryptotracker.domain.coin.model.Event
+import com.plcoding.cryptotracker.domain.util.toLocalDate
 import java.time.Instant
 import java.time.ZoneId
+import java.time.temporal.TemporalQueries.localDate
 
 @Composable
 fun EventItem(
@@ -35,10 +37,6 @@ fun EventItem(
     modifier: Modifier = Modifier
 ) {
     val contentColor = if (isSystemInDarkTheme()) Color.White else Color.Black
-    val localDate = Instant
-        .parse(event.date)
-        .atZone(ZoneId.systemDefault())
-        .toLocalDate()
 
     Row(
         modifier = modifier
@@ -75,7 +73,7 @@ fun EventItem(
             horizontalAlignment = Alignment.End
         ) {
             Text(
-                text = localDate.toString(),
+                text = event.date.toLocalDate().toString(),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = contentColor
