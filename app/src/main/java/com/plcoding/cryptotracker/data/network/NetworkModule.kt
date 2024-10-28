@@ -19,5 +19,4 @@ object NetworkModule {
     return HttpClientFactory.create(CIO.create())
   }
 
-
 }
