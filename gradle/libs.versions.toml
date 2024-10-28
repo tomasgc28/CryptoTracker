@@ -22,7 +22,7 @@ mockito = "5.13.0"
 mockitoKotlin = "5.4.0"
 coreTesting = "2.2.0"
 coroutine = "1.8.1"
-
+coilVersion = "2.4.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -65,6 +65,8 @@ mockito-kotlin = { group = 'org.mockito.kotlin', name = "mockito-kotlin", versio
 kotlinx-coroutines-test = { group = 'org.jetbrains.kotlinx', name = "kotlinx-coroutines-test", version.ref = "coroutine" }
 core-testing = { group =  "androidx.arch.core" , name = "core-testing", version.ref = "coreTesting" }
 
+# Coil for image loading
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

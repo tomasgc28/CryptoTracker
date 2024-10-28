@@ -75,6 +75,10 @@ dependencies {
 
     implementation(libs.bundles.ktor)
 
+
+    //Coil for image loading
+    implementation(libs.coil.compose)
+
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)

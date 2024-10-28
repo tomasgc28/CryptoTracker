@@ -25,7 +25,7 @@ fun EventListScreen(
     onAction: (EventListAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    if(state.isLoading) {
+    if (state.isLoading) {
         Box(
             modifier = modifier
                 .fillMaxSize(),

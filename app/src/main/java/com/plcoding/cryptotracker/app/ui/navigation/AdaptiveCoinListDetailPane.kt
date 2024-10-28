@@ -15,8 +15,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.plcoding.cryptotracker.core.designsystem.util.ObserveAsEvents
 import com.plcoding.cryptotracker.core.designsystem.util.toString
-import com.plcoding.cryptotracker.features.crypto.coin_detail.EventDetailScreen
-import com.plcoding.cryptotracker.features.crypto.coin_list.CoinListAction
+import com.plcoding.cryptotracker.features.crypto.coin_detail.EventDetailsScreen
+import com.plcoding.cryptotracker.features.crypto.coin_list.EventListAction
 import com.plcoding.cryptotracker.features.crypto.coin_list.EventListEvent
 import com.plcoding.cryptotracker.features.crypto.coin_list.EventListScreen
 import com.plcoding.cryptotracker.features.crypto.coin_list.EventListViewModel
@@ -49,9 +49,8 @@ fun AdaptiveCoinListDetailPane(
                 EventListScreen(
                     state = state,
                     onAction = { action ->
-                        viewModel.onAction(action)
                         when (action) {
-                            is CoinListAction.OnCoinClick -> {
+                            is EventListAction.OnEventClick -> {
                                 navigator.navigateTo(
                                     pane = ListDetailPaneScaffoldRole.Detail
                                 )
@@ -63,7 +62,7 @@ fun AdaptiveCoinListDetailPane(
         },
         detailPane = {
             AnimatedPane {
-                EventDetailScreen(state = state)
+                EventDetailsScreen(event = state.event.first())
             }
         },
         modifier = modifier
